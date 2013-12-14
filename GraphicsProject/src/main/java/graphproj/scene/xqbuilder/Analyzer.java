@@ -9,11 +9,11 @@ class Analyzer {
     public Analyzer() {
 
     }
-    public <T> List<T> analyzeContainer(XQueryResult result, AnalyzerPart analyzerPart) {
+    public <T> List<T> analyzeMultiple(XQueryResult result, AnalyzerPart analyzerPart) {
         List<T> contValues = new ArrayList<T>();
         for(String strRes : result) {
-            T resAnalizer = analyzerPart.analyze(strRes);
-            contValues.add(resAnalizer);
+            T resAnalyzer = analyzerPart.analyze(strRes);
+            contValues.add(resAnalyzer);
         }
         return contValues;
     }
