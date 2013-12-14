@@ -10,7 +10,7 @@ public class XQuerySceneBuilder  implements SceneBuilder {
     private Analyzer analyzer;
     private QueriesExecutor executor;
     public XQuerySceneBuilder(String filename) {
-
+        executor = new S9ApiQueriesExecutor("http://www.collada.org/2005/11/COLLADASchema");
     }
     @Override
     public void buildScene() {
