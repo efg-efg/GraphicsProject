@@ -6,6 +6,6 @@ package graphproj.scene;
 public interface SceneBuilder {
     void buildScene();
     void buildModel();
-    boolean canbuildModel();
+    boolean canBuildModel();
     Scene getScene();
 }
