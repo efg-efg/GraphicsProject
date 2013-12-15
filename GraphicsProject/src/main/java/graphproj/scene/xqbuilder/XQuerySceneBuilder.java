@@ -22,21 +22,24 @@ public class XQuerySceneBuilder  implements SceneBuilder {
         fillCommands(filename);
     }
     @Override
-    public void buildScene() {
+    public void buildScene() throws Exception{
         scene = new Scene();
-        List<String>
-        iterModelId =
+        List<String> lstModelId = loadIdNames.execute("");
+        iterModelId = lstModelId.iterator();
     }
     @Override
-    public void buildModel() {
+    public void buildModel() throws Exception {
+        String modelId = iterModelId.next();
+        XQueryModel model = new XQueryModel(modelId);
+        scene.add(model);
 
     }
     @Override
     public boolean canBuildModel() {
-        return true;
+        return iterModelId.hasNext();
     }
     @Override
     public Scene getScene() {
-        return new Scene();
+        return scene;
     }
 }

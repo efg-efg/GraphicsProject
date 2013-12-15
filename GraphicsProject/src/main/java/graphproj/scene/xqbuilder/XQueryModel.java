@@ -10,6 +10,7 @@ class XQueryModel implements Model {
     public XQueryModel(String modelId) {
         this.modelId = modelId;
     }
+    @Override
     public String getModelId() {
         return modelId;
     }

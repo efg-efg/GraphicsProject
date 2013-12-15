@@ -15,7 +15,8 @@ class LoadIdNamesCommand implements Command {
         return externVars;
     }
     private void fillQuery(String filename) {
-        String strQuery = "";
+        String strQuery = "declare variable $inputDocument external; for $data in doc($inputDocument)/COLLADA/library_geometries" +
+                "/geometry return $data/string(@id)";
         Map<String, String> externVars = fillExternVars(filename);
         loadIdNamesQuery = new Query(externVars, strQuery);
     }
