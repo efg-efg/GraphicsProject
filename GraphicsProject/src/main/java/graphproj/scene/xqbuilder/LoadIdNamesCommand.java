@@ -9,11 +9,15 @@ class LoadIdNamesCommand implements Command {
     private Analyzer analyzer;
     private QueriesExecutor executor;
     private Query loadIdNamesQuery;
-    private void fillExternVars(String filename) {
-
+    private Map<String, String> fillExternVars(String filename) {
+        Map<String, String> externVars = new TreeMap<String, String>();
+        externVars.put("inputDocument", filename);
+        return externVars;
     }
     private void fillQuery(String filename) {
-
+        String strQuery = "";
+        Map<String, String> externVars = fillExternVars(filename);
+        loadIdNamesQuery = new Query(externVars, strQuery);
     }
     public LoadIdNamesCommand(Analyzer analyzer, QueriesExecutor executor, String filename) {
         this.analyzer = analyzer;
@@ -23,6 +27,6 @@ class LoadIdNamesCommand implements Command {
 
     @Override
     public List<String> execute(String data) throws Exception {
-        return analyzer.analyzeMultiple();
+        return analyzer.analyzeMultiple(executor.executeQuery(loadIdNamesQuery), new StringAnalyzerPart());
     }
 }

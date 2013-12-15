@@ -9,9 +9,10 @@ import java.util.Map.Entry;
  * Created by alex on 14.12.13.
  */
 class S9ApiQueriesExecutor  implements QueriesExecutor {
+    private static volatile S9ApiQueriesExecutor instance;
     private Processor processor;
     private XQueryCompiler compiler;
-    public S9ApiQueriesExecutor(String defaultXmlns) {
+    private S9ApiQueriesExecutor(String defaultXmlns) {
         processor = new Processor(false);
         compiler = processor.newXQueryCompiler();
         compiler.declareNamespace("", defaultXmlns);
@@ -33,4 +34,29 @@ class S9ApiQueriesExecutor  implements QueriesExecutor {
         return new XQResXdmValue(querEv.evaluate());
 
     }
+    public static S9ApiQueriesExecutor getInstance(String xmlns) {
+        if(instance == null ) {
+            synchronized (S9ApiQueriesExecutor.class) {
+                if(instance == null)
+                    instance = new S9ApiQueriesExecutor(xmlns);
+            }
+        }
+        return instance;
+    }
 }
+/*
+private static volatile Singleton instance;
+
+    public static Singleton getInstance() {
+        Singleton localInstance = instance;
+        if (localInstance == null) {
+            synchronized (Singleton.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new Singleton();
+                }
+            }
+        }
+        return localInstance;
+    }
+*/
